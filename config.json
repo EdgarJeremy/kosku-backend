@@ -20,7 +20,7 @@
         "host": "localhost",
         "user": "",
         "password": "",
-        "database": "sirius",
+        "database": "kosku",
         "port": 5432,
         "dialect": "postgres"
     },

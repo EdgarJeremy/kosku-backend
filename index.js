@@ -88,6 +88,17 @@ app.get("/", function (req, res) {
 });
 
 /**
+ * Inspector API
+ */
+app.get('/app_meta', function(req, res) {
+    let data = {};
+    data.routes = getRoutesData(app, models);
+    delete data.routes.string;
+    data.models = [];
+    res.json(data);
+});
+
+/**
  * Synchronize & motd 
  */
 models.sequelize.sync({

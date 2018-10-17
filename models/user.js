@@ -1,10 +1,10 @@
 export default (sequelize, DataTypes) => {
     const User = sequelize.define("user", {
-        name: {
+        full_name: {
             type: DataTypes.STRING(191),
             allowNull: false
         },
-        username: {
+        email: {
             type: DataTypes.STRING(191),
             unique: true,
             allowNull: false
@@ -13,12 +13,16 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.STRING(191),
             allowNull: false
         },
-        type: {
-            type: DataTypes.ENUM(['administrator', 'user']),
+        phone: {
+            type: DataTypes.STRING(191),
             allowNull: false
         },
-        avatar: {
-            type: DataTypes.TEXT('long'),
+        id_card: {
+            type: DataTypes.STRING(191),
+            allowNull: false
+        },
+        type: {
+            type: DataTypes.ENUM(['administrator', 'owner']),
             allowNull: false
         },
         active: {
@@ -30,12 +34,13 @@ export default (sequelize, DataTypes) => {
             defaultValue: null
         }
     }, {
-        underscored: true
-    });
+            underscored: true
+        });
 
     User.associate = (models) => {
-        let { Token } = models;
-        User.hasMany(Token);
+        const { Token, Place } = models;
+        User.hasMany(Token, { onDelete: 'cascade' });
+        User.hasMany(Place);
     }
 
     return User;
