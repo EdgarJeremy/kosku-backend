@@ -18,7 +18,8 @@ export default (app, models) => {
                 if(route) {
                     let endpoint = route.path;
                     let verbs = route.methods;
-                    route_data[`/api/${basepoint}`].endpoints.push({ endpoint, verbs: extract_verbs(verbs) });
+                    let keys = info.keys.map((t) => t.name);
+                    route_data[`/api/${basepoint}`].endpoints.push({ endpoint, verbs: extract_verbs(verbs), keys });
                 }
             });
         }

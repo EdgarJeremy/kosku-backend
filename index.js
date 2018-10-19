@@ -92,9 +92,23 @@ app.get("/", function (req, res) {
  */
 app.get('/app_meta', function(req, res) {
     let data = {};
-    data.routes = getRoutesData(app, models);
-    delete data.routes.string;
+    let routes = getRoutesData(app, models, socketListener);
+    data.routes = [];
+    Object.keys(routes.data).forEach((route) => {
+        data.routes.push({
+            basepoint: route,
+            endpoints: routes.data[route].endpoints
+        });
+    });
     data.models = [];
+    Object.keys(models).forEach((model) => {
+        if(model !== 'sequelize' && model !== 'Sequelize') {
+            data.models.push({
+                name: model,
+                attributes: models[model].rawAttributes
+            });
+        }
+    })
     res.json(data);
 });
 
