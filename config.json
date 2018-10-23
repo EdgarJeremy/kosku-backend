@@ -17,9 +17,9 @@
         "models": "models"
     },
     "database": {
-        "host": "localhost",
-        "user": "",
-        "password": "",
+        "host": "192.168.1.9",
+        "user": "postgres",
+        "password": "dbsirius221b",
         "database": "kosku",
         "port": 5432,
         "dialect": "postgres"

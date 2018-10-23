@@ -11,11 +11,11 @@ function route(app, models, socketListener) {
     /**
      * Router disini..
      */
-    router.post("/login", requiredPost(["username", "password"]), a(async (req, res) => {
+    router.post("/login", requiredPost(["email", "password"]), a(async (req, res) => {
         const body = req.body;
         const user = await models.User.findOne({
             include: [{ model: models.Token }],
-            where: { username: body.username },
+            where: { email: body.email },
         });
         if (user) {
             if (bcrypt.compareSync(body.password, user.password)) {
